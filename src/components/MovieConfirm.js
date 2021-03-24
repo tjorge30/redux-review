@@ -1,8 +1,12 @@
-import React from 'react'
-import styles from './styles'
+import React from 'react';
+import styles from './styles';
+import { connect } from 'react-redux';
+import { updateMovieList } from '../redux/moviesReducer';
+const {title, poster, rating} = props
 
 const MovieConfirm = props => {
   const confirmMovie = () => {
+    props.updateMovieList(titel, poster, rating)
     props.history.push('/list')
   }
 
@@ -25,4 +29,11 @@ const MovieConfirm = props => {
     </div>
   )
 }
-export default MovieConfirm
+
+const mapStateToProps = (state) => {
+  const {title, poster, rating} = state
+  return {
+    title, poster, rating
+  }
+}
+export default connect(mapStateToProps, {updateMovieList})(MovieConfirm)
